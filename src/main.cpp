@@ -23,7 +23,6 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 unsigned long lastMsg = 0;
 
-// Hàm kết nối WiFi
 void setup_wifi() {
   delay(10);
   Serial.println();
@@ -105,7 +104,7 @@ void loop() {
   }
   client.loop();
 
-  // 2. Gửi dữ liệu định kỳ (Non-blocking delay)
+  // 2. Gửi dữ liệu định kỳ
   unsigned long now = millis();
   if (now - lastMsg > 2000) {
     lastMsg = now;
@@ -120,9 +119,9 @@ void loop() {
       return;
     }
 
-    // --- PHẦN 1: Hiển thị lên LCD (Giữ nguyên để báo cáo) ---
+    // Hiển thị lên LCD 
     lcd.setCursor(0, 0);
-    lcd.print("Temp: " + String(t, 2) + "C   "); // Thêm khoảng trắng để xóa ký tự cũ
+    lcd.print("Temp: " + String(t, 2) + "C   ");
     lcd.setCursor(0, 1);
     lcd.print("Humid: " + String(h, 2) + "%   ");
 
@@ -130,8 +129,6 @@ void loop() {
     
     client.publish("esp32/test/all", jsonPayload.c_str()); 
     
-    // In ra Serial để kiểm tra
-    // Serial.print("");
     Serial.println(jsonPayload);
   }
 }
