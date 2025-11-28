@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "D:/esp32/Esp32"
+		},
+		{
+			"name": "Esp32_MQTT",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
